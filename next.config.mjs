@@ -1,6 +1,7 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  basePath: '/services/thorium-web',
+  // basePath: '/services/thorium-web',
+  assetPrefix: '/services/thorium-web',
   // Disable React running twice as it messes up with iframes
   reactStrictMode: false,
   typedRoutes: true,
@@ -52,25 +53,25 @@ const nextConfig = {
     // Get allowed domains from environment variable or default to all in development
     const allowedDomains = process.env.NEXT_PUBLIC_MANIFEST_ALLOWED_DOMAINS
       ? process.env.NEXT_PUBLIC_MANIFEST_ALLOWED_DOMAINS.split(",")
-          .map(domain => domain.trim())
-          // Ensure domain has protocol
-          .map(domain => {
-            if (domain === "*") return domain;
-            if (!domain.match(/^https?:\/\//)) {
-              return `https://${ domain }`;
-            }
-            return domain;
-          })
+        .map(domain => domain.trim())
+        // Ensure domain has protocol
+        .map(domain => {
+          if (domain === "*") return domain;
+          if (!domain.match(/^https?:\/\//)) {
+            return `https://${domain}`;
+          }
+          return domain;
+        })
       : [];
-    
+
     // In development, allow all origins for easier testing
     const allowAllOrigins = process.env.NODE_ENV !== "production";
-    
+
     // If no domains are specified and not in development, default to empty array (deny all)
-    const allowedOrigins = allowAllOrigins 
+    const allowedOrigins = allowAllOrigins
       ? ["*"]
-      : allowedDomains.length > 0 
-        ? allowedDomains 
+      : allowedDomains.length > 0
+        ? allowedDomains
         : [];
 
     return [
