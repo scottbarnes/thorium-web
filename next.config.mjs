@@ -1,5 +1,6 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  basePath: '/services/thorium-web',
   // Disable React running twice as it messes up with iframes
   reactStrictMode: false,
   typedRoutes: true,
